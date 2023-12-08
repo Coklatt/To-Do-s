@@ -39,7 +39,7 @@ class TasksService {
             values: [toDoId],
         };
 
-        const result = await this._pool
+        const tasks = await this._pool
             .query(query)
             .then((fetchResult) => fetchResult)
             .catch((err) => {
@@ -47,7 +47,7 @@ class TasksService {
                 throw new InternalServerError('Internal server error!');
             });
 
-        return result.rows;
+        return tasks.rows;
     }
 
     async updateTaskStatus(taskId, status, owner) {
@@ -62,9 +62,7 @@ class TasksService {
         const result = await this._pool.query(query);
 
         if (!result.rowCount) {
-            throw new InvariantError(
-                'Failed to change task status. Id not found'
-            );
+            throw new InvariantError('Failed to change task status. Id not found');
         }
 
         return result.rows[0];
