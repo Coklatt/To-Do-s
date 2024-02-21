@@ -9,7 +9,7 @@ class ToDoHandler {
         autoBind(this);
     }
 
-    async postToDo(req, h) {
+    async postToDoHandler(req, h) {
         console.log(req.payload);
         this._validator.validateToDoPayload(req.payload);
         const { id: owner } = req.auth.credentials;
@@ -27,7 +27,7 @@ class ToDoHandler {
         return res;
     }
 
-    async getToDos(req) {
+    async getToDosHandler(req) {
         const { id: owner } = req.auth.credentials;
 
         const toDo = await this._service.getToDos(owner);
@@ -39,11 +39,12 @@ class ToDoHandler {
         };
     }
 
-    async getToDoById(req) {
+    async getToDoByIdHandler(req) {
         const { toDoId } = req.params;
         const { id: owner } = req.auth.credentials;
 
-        const { id, user_id, name, description } = await this._service.getToDoById(toDoId);
+        const { id, user_id, name, description } =
+            await this._service.getToDoById(toDoId);
         const tasks = await this._tasksService.getTasks(toDoId, owner);
 
         return {
@@ -64,7 +65,7 @@ class ToDoHandler {
         };
     }
 
-    async deleteToDoById(req, h) {
+    async deleteToDoByIdHandler(req, h) {
         const { toDoId } = req.params;
         const { id: owner } = req.auth.credentials;
 
