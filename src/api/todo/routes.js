@@ -2,7 +2,7 @@ const routes = (handler) => [
     {
         method: 'POST',
         path: '/todos',
-        handler: handler.postToDoHandler,
+        handler: handler.postToDo,
         options: {
             auth: 'todo_list_strategy',
         },
@@ -10,7 +10,7 @@ const routes = (handler) => [
     {
         method: 'GET',
         path: '/todos',
-        handler: handler.getToDosHandler,
+        handler: handler.getToDos,
         options: {
             auth: 'todo_list_strategy',
         },
@@ -18,7 +18,7 @@ const routes = (handler) => [
     {
         method: 'GET',
         path: '/todos/{toDoId}',
-        handler: handler.getToDoByIdHandler,
+        handler: handler.getToDoById,
         options: {
             auth: 'todo_list_strategy',
         },
@@ -26,7 +26,7 @@ const routes = (handler) => [
     {
         method: 'DELETE',
         path: '/todos/{toDoId}',
-        handler: handler.deleteToDoByIdHandler,
+        handler: handler.deleteToDoById,
         options: {
             auth: 'todo_list_strategy',
         },
