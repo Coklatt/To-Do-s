@@ -63,7 +63,7 @@ class ToDoService {
             values: [owner],
         };
 
-        const result = await this._pool
+        const todos = await this._pool
             .query(query)
             .then((fetchResult) => fetchResult)
             .catch((err) => {
@@ -71,7 +71,7 @@ class ToDoService {
                 throw new InternalServerError('Internal Server Error!');
             });
 
-        return result.rows;
+        return todos.rows;
     }
 
     async getToDoById(id) {
@@ -79,13 +79,13 @@ class ToDoService {
             text: 'SELECT * FROM to_dos WHERE id = $1',
             values: [id],
         };
-        const result = await this._pool.query(query);
+        const todo = await this._pool.query(query);
 
-        if (!result.rowCount) {
+        if (!todo.rowCount) {
             throw new NotFoundError('To-do not found!');
         }
 
-        return result.rows[0];
+        return todo.rows[0];
     }
 
     async deleteToDoById(id) {
